@@ -2,11 +2,13 @@
 
 var fs = require("fs");
 var path = require("path");
-var Sequelize = require("sequelize");
+// var Sequelize = require("sequelize");
 var basename = path.basename(module.filename);
 var env = process.env.NODE_ENV || "development";
-var config = require(__dirname + "/../config/config.json")[env];
+// var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
+var mysql = require('mysql');
+var connection;
 
 if (process.env.JAWSDB_URL) {
     connection = mysql.createConnection(process.env.JAWSDB_URL);
@@ -20,11 +22,11 @@ if (process.env.JAWSDB_URL) {
 };
 
 
-if (config.use_env_variable) {
-    var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
-    var sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// if (config.use_env_variable) {
+//     var sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } else {
+//     var sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 fs
     .readdirSync(__dirname)
@@ -42,7 +44,7 @@ Object.keys(db).forEach(function (modelName) {
     }
 });
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+// db.sequelize = sequelize;
+// db.Sequelize = Sequelize;
+connection.connect();
+module.exports = connection;
