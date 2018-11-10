@@ -10,14 +10,18 @@ var db = {};
 var mysql = require('mysql');
 var connection;
 
-if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
+if (process.env.mysql://n4g69ak9f9e2f2yd:l9vc2z40aas3552a@rtzsaka6vivj2zp1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/o4vz2n5xcnh3i6ud
+
+) {
+    connection = mysql.createConnection(process.env.mysql://n4g69ak9f9e2f2yd:l9vc2z40aas3552a@rtzsaka6vivj2zp1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/o4vz2n5xcnh3i6ud
+
+);
 } else {
     connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'hacktheplanet',
-        database: 'todoagain_db'
+        password: 'ATL2CHIfly$',
+        database: 'bamazon_db'
     });
 };
 
