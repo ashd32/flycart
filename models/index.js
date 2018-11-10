@@ -7,13 +7,13 @@ var basename = path.basename(module.filename);
 var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
-var mysql2 = require('mysql2');
+var mysql = require('mysql');
 var connection;
 
 if (process.env.JAWSDB_URL) {
-    connection = mysql2.createConnection(process.env.JAWSDB_URL);
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
-    connection = mysql2.createConnection({
+    connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: 'ATL2CHIfly$',
