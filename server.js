@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 var sequelize = require("sequelize");
-const PORT = process.env.JAWSDB_URL || 8080;
+const PORT = process.env.PORT || 8080;
 
 const db = require("./models");
 
