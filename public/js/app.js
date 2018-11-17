@@ -4,7 +4,7 @@ $(document).ready(function(){ //AP: Wrapped the entire app.js in document.ready
   // render function to display data
     const render = function (gear) {
         for(let i = 0; i < gear.length; i++){
-            $('#searchDump').append(`<h2>Product Name: ${gear[i].product_name}</h2><h3>Price: $${gear[i].price}</h3><h6># Available: ${gear[i].stock_quantity}</h6><h4>Product ID: ${gear[i].id}</h4>`);
+            $('#searchDump').append(`<h2>Product Name: ${gear[i].product_name}</h2><h3>Price: $${gear[i].price}</h3><h6># Available: ${gear[i].stock_quantity}</h6>`);
         };
     };
     // function that captures user input to search for gear
@@ -28,7 +28,7 @@ $(document).ready(function(){ //AP: Wrapped the entire app.js in document.ready
     const postGear = function (e) {
         e.preventDefault();
        
-        var productID = $('.productID').val().trim();
+        var productName = $('.productName').val().trim();
         var productQuantity = $('.productQuantity').val().trim();
 
         // $.post('/api/products', newGear)
@@ -37,7 +37,7 @@ $(document).ready(function(){ //AP: Wrapped the entire app.js in document.ready
         var customerProduct;
         for (let i = 0; i < productArray.length; i++){
             
-            if (productArray[i].id === parseInt(productID)) {
+            if (productArray[i].id === parseInt(productName)) {
                 customerProduct = productArray[i]
             }
         }
