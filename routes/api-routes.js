@@ -8,4 +8,4 @@ module.exports = function (app) {
   products.find('product_name');
   products.create();
   products.delete();
-  products.update('product_name');
+  products.update('product_name')};
