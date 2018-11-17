@@ -1,20 +1,44 @@
-const RestfulAPI = require('./RestClass');
-const models = require('../models');
+const RestfulAPI = require('../RestClass');
+const db = require('../models');
 
 module.exports = function (app) {
-  
-  const products = new RestfulAPI('products', app, models.Product);
-  products.findAll();
-  products.find('product_name');
-  products.create();
-  products.delete('product_name');
-  products.update('product_name');
 
-//   const customers = new RestfulAPI('customers', app, models.Customer);
-//   products.findAll();
-//   products.find('customer_name');
-//   products.create();
-//   products.delete('customer_name');
-//   products.update('customer_name');
-// console.log(customer_name.findAll);
-};
+  app.get('/api/products', function (req, res) {
+    db.Product.findAll({}).then(function (rows) {
+      res.json(rows)
+    }).catch(function (error) {
+      res.json({ error: error });
+    });
+  });
+
+  app.get('/api/products/:product_name', function (req, res) {
+    db.Product.findALL({
+      where: {
+        product_name: req.params.product_name
+      }
+    }).then(function (data) {
+      res.json(data);
+    }).catch(function (err) {
+      res.json(err);
+    })
+  });
+
+  app.post('/api/products', function (req, res) {
+    db.Product.create(req.body).then(function (rows) {
+      res.json({ success: true });
+    }).catch(function (error) {
+      res.json({ error: error })
+    });
+  });
+
+  app.put('/api/products/:product_name', function (req, res) {
+    db.Product.update(
+      req.body,
+      { where: { product_name: req.params.product_name } }
+    ).then(function () {
+      res.json({ success: true });
+    }).catch(function (error) {
+      res.json({ error: error });
+    });
+  });
+}
