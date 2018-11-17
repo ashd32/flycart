@@ -1,4 +1,4 @@
-const RestfulAPI = require('../RestClass');
+const RestfulAPI = require('./RestClass');
 const db = require('../models');
 
 module.exports = function (app) {
