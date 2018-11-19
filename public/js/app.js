@@ -1,48 +1,144 @@
-$(document).ready(function () { //AP: Wrapped the entire app.js in document.ready
-    console.log('i am here')
-    var productArray = [];
-    // render function to display data
-    const render = function (gear) {
-        for (let i = 0; i < gear.length; i++) {
-            $('#searchDump').append(`<h2>Product Name: ${gear[i].product_name}</h2><h3>Price: $${gear[i].price}</h3><h6># Available: ${gear[i].stock_quantity}</h6>`);
-        };
+let cart = [];
+//this is the function to render all items in a database.
+const renderItems = function(items) {
+  items.forEach(function(item) {
+    let newProduct = $(` <tr>
+          <td class="id">${item.id}</td>
+          <td class="product_name">${item.product_name}</td>
+          <td class="department_name">${item.department_name}</td>
+          <td class="price">${item.price}</td>
+          <td class="stock_quantity">${item.stock_quantity}</td>
+          <td class="quantity"><input class="buy1" id="input"></td>
+          <td><button type="button" class="btn btn-info">Add to Cart</button><td>
+        </tr>`);
+    $(".tbodypage").append(newProduct);
+  });
+};
+
+const clearInput = function() {
+  console.warn("in clear input");
+  $("#input").val("");
+};
+
+const validate = function(item) {
+  if (item.incart.padStart(4,0) > item.instock.padStart(4,0)) {
+    $(".alert").removeClass("hide");
+    clearInput();
+  } else if (isNaN(item.incart)){
+    $(".alert").removeClass("hide");
+    clearInput();
+  }
+  else {
+    cart.push(item);
+    clearInput();
+  }
+};
+
+
+
+//this is the document ready function that says to render all the items in the database, to the table.
+$(document).ready(() => {
+  $.ajax({
+    url: "/api/products",
+    type: "GET"
+  }).then(function(rows) {
+    renderItems(rows);
+  });
+  //this says when the add to cart button is clicked, to then add the data to the array.
+  $(".table-body").on("click", ".btn", function() {
+    $(".alert").addClass("hide");
+    const item = {
+      id: $(this)
+        .parents("tr")
+        .find(".id")
+        .text(),
+      name: $(this)
+        .parents("tr")
+        .find(".product_name")
+        .text(),
+      department: $(this)
+        .parents("tr")
+        .find(".department_name")
+        .text(),
+      price: $(this)
+        .parents("tr")
+        .find(".price")
+        .text(),
+      instock: $(this)
+        .parents("tr")
+        .find(".stock_quantity")
+        .text(),
+      incart: $(this)
+        .parents("tr")
+        .find(".buy1")
+        .val()
     };
-    // function that captures user input to search for gear
-    const searchGear = function () {
-        event.preventDefault();
-        console.log('i am here!')
-        const product_name = $('.searchKeyWord').val()
-        console.log('product: ', product_name)
 
-        $.get(`/api/products`)
-            .then(function (gear) {
-                console.log(gear);
-                productArray = gear.slice();
-                render(gear);
-            })
-    };
+    validate(item);
+   
 
-    const postGear = function (e) {
-        e.preventDefault();
+    console.table(cart);
+  });
 
-        var productName = $('.productName').val().trim();
-        var productQuantity = $('.productQuantity').val().trim();
+  $(".btncart").on("click", function() {
+    $(".modal-body").empty();
 
-        // $.post('/api/products', newGear)
-        // .then(function (gear) {   
-        // });
-        var customerProduct;
-        for (let i = 0; i < productArray.length; i++) {
+    $('.modal-body').append (`  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Product Id</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">Cost (USD)</th>
+        <th scope="col">Quanity</th>
+      </tr>
+    </thead>
+    <tbody class="tbodymodal table-body"></tbody>
+  </table>
+  <div class="totalCart"></div>`);
+    let totalcost = 0;
+    for (let i = 0; i < cart.length; i++) {
+      totalcost += (parseFloat(cart[i].price)*parseFloat(cart[i].incart.padStart(3,0)))
+      console.log(cart[i]);
+      $(".tbodymodal").append(`<tr>
+    <td class="cartid">${cart[i].id}</td>
+          <td class="cart-product_name">${cart[i].name}</td>
+          <td class="cart-department_name">${cart[i].department}</td>
+          <td class="cart-price">$${cart[i].price}</td>
+          <td class="cat-quantity">${cart[i].incart}</td>
+          </tr>`);
+          
+    }
+    $(".totalCart").empty();
+    $(".totalCart").append(`<h4>TOTAL PRICE:    $${totalcost}</h4>`)
+    $(".modal").modal("show");
+  });
 
-            if (productArray[i].id === parseInt(productName)) {
-                customerProduct = productArray[i]
-            }
-        }
-        console.log(customerProduct);
-    };
+  
+});
 
-    $('#searchProduct').submit(postGear);
+$(".btnPurchase").on("click", function (){
+  
+  for(let i=0; i< cart.length; i++){
+    const inCartnow = cart[i].incart ;
+    const inStocknow = cart[i].instock ; 
+    const newStock = function (a,b){
+      return a - b;
+    }
+     stockUpdate= newStock(inStocknow, inCartnow)
+    $.ajax({
+      url: `/api/products/${cart[i].id}`,
+      type: "PUT",
+      data: `stock_quantity= ${stockUpdate}`
+    }).then(function(data) {
+      $('.tbodypage').empty();
+      renderItems(data);
+    }).catch(function(data){
+      console.log(data);
+    })
+    $('.modal-body').empty();
+    $('.modal-body').append("Purchase approved!")
 
-
-    searchGear();
+  }
+  cart= [];
 });

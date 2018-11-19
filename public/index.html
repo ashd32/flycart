@@ -2,36 +2,63 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bamazon - Home</title>
-    <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
-    <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
-<!-- Bootstrap style responsive -->	
-	<link href="themes/css/bootstrap-responsive.min.css" rel="stylesheet"/>
-	<link href="themes/css/font-awesome.css" rel="stylesheet" type="text/css">
-<!-- Google-code-prettify -->	
-	<link href="themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="./js/app.js"></script>
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<title>Document</title>
 </head>
 
 <body>
+	<div id="top">
+		<div id="titleBand">
+			<div id="logo">Bam!azon</div>
+			<div id="tagline">We Got Stuff! You Buy Now!</div>
+			<button id="submitOrders">Cart! Go!</button>
+		</div>
 
-    
-    <h1>Search Products</h1>
+	</div>
+
+	<div id="topBarBox">
+		<div id="topBar">
+			<div class="item">item!</div>
+			<div class="depo">depo!</div>
+			<div class="price">Price!</div>
+			<div class="stock_quantity">stock_quantity!</div>
+			<div class="order">Order!</div>
+			<div class="buy">Buy!</div>
+		</div>
+	</div>
+	<div id="itemContainer">
+		<div id="warning">Whoa! Check Stuff First!</div>
+		<div id="itemList">
+		</div>
+	</div>
+
+	<div id="myModal" class="modal">
+		<div id="modalContent">
+			<div id="cartLine">Soon To Be Stuff!</div>
+			<div id="cartHeaders">
+				<div class="item">item!</div>
+				<div class="depo">depo!</div>
+				<div class="price">Price!</div>
+				<div class="stock_quantity">Count!</div>
+				<div class="price">Total!</div>
+				<div class="buy">No!</div>
+			</div>
+			<div id="cartItems"></div>
+			<div id="totalLine"></div>
+			<div id="buttonRow">
+				<button class="lastButtons" id="checkout">Buy!</button>
+				<button class="lastButtons" id="cancel">Redo!</button>
+			</div>
+		</div>
+	</div>
 
 
-
-    <form id='searchProduct'>
-        <input type="text" class="productName" placeholder="Enter product name"/>
-        <input type="text" class="productQuantity" placeholder="Enter product quantity"/>
-        <input type="submit" />
-    </form>
-
-    <div id="searchDump"></div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="./js/app.js"></script>
 </body>
 
 </html>

@@ -1,23 +1,20 @@
-const express = require("express");
+const express = require('express');
+const path = require('path');
+const db = require('./models');
 const app = express();
-var sequelize = require("sequelize");
 const PORT = process.env.PORT || 8080;
 
-const db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static('public'));
 
+// Routes
+// =============================================================
+require('./routes/api-routes.js')(app);
 
-require("./routes/api-routes.js")(app);
-require("./routes/html-routes.js")(app);
-
-
-
-  app.listen(PORT, function() {
-    console.log(`App listening on JAWSDB_URL ${PORT}`);
-  });
-
-
-module.exports = app;
+db.sequelize.sync({}).then(function () {
+	app.listen(PORT, function () {
+		console.log('App listening on PORT ' + PORT);
+	});
+});
