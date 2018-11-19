@@ -5,10 +5,18 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./seeds/seed-db.js && node server.js"
   },
-  "author": "ashley-donald",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjeng08/bamazon.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjeng08/bamazon/issues"
+  },
+  "homepage": "https://github.com/jjeng08/bamazon#readme",
   "dependencies": {
     "express": "^4.16.4",
     "mysql": "^2.16.0",
