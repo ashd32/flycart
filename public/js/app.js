@@ -4,82 +4,52 @@ $(document).ready(function(){
 
 
 // render function to display data
-  const render = function (gear) {
-      for(let i = 0; i < gear.length; i++){
-          $('#searchDump').append(`<h2>Product Name: ${gear[i].product_name}</h2><h3>Price: $${gear[i].department_name}</h3><h3>Price: $${gear[i].price}</h3><h6># Available: ${gear[i].stock_quantity}</h6><h4>Product ID: ${gear[i].id}</h4>`);
+  const render = function (merch) {
+      for(let i = 0; i < merch.length; i++){
+          $('#searchDump').append(
+              `<h2>Item: ${merch[i].product_name}</h2><h3>Department: ${merch[i].department_name}
+              </h3><h3>Price: $${merch[i].price}</h3><h5># Available: ${merch[i].stock_quantity}</h5>
+              <h5>Product ID: ${merch[i].id}</h5>`);
       };
   };
 
 
-  // function that captures user input to search for gear
-  const searchGear = function() {
+  // function that captures user input to search for merch
+  const searchmerch = function() {
       $.get(`/api/products`)
-      .then(function (gear) {
-          console.log(gear);
-          productArray = gear.slice();
-          render(gear);
+      .then(function (merch) {
+          console.log(merch);
+          productArray = merch.slice();
+          render(merch);
       })
   };
-  
 
-  // function to post new gear to products table
-  const postGear = function (e) {
-      e.preventDefault();
-     
-      var productID = $('.productID').val().trim();
-      var productQuantity = $('.productQuantity').val().trim();
-      var customerProduct;
-      for (let i = 0; i < productArray.length; i++){
-          
-          if (productArray[i].id === parseInt(productID)) {
-              customerProduct = productArray[i]
-          }
-      }
-      console.log(customerProduct);
-  };
 
-  $('#searchProduct').submit(postGear);
-
-  searchGear();
+  searchmerch();
 });
 
 
 // render function to display data
-const render = function (gear) {
-  for(let i = 0; i < gear.length; i++){
-      $('#searchDump').append(`<h1>${gear[i].product_name}</h1><h4>${gear[i].id}</h4>`);
+const render = function (merch) {
+  for(let i = 0; i < merch.length; i++){
+      $('#searchDump').append(`<h1>${merch[i].product_name}</h1><h4>${merch[i].id}</h4>`);
   };
 };
 
 
-// function that captures user input to search for gear
-const searchGear = function (event) {
+// function that captures user input to search for merch
+const searchmerch = function (event) {
   event.preventDefault();
   const product_name = $('#searchKeyWord').val()
 
 
   $.get(`/api/products/${product_name}`)
-  .then(function (gear) {
-      console.log(gear);
-      render(gear);
+  .then(function (merch) {
+      console.log(merch);
+      render(merch);
   })
 };
 
 
 // respond to button click
-$('#searchSubmit').on('click', searchGear);
-
-
-// function to post new gear to products table
-const postGear = function (e) {
-  e.preventDefault();
-  const newGear = {
-      name: $('#keyWord').val()
-  };
-
-  $.post('/api/products', newGear)
-  .then(function (gear) {   
-  });
-};
-
-$('#submit').on('click', postGear);
+$('#searchSubmit').on('click', searchmerch);
