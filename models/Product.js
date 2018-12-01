@@ -1,20 +1,17 @@
-module.exports = function (connection, Sequelize) {
-	const sequelize = new Sequelize('connectionUri', {
-		define: {
-		  timestamps: false 
-		}
-	  });
-	  
+module.exports = function(connection, Sequelize) {
 	const Product = connection.define(
-
-// Defines Schema for Sequelize
-		"Product",
-		{
-			product_name: Sequelize.STRING,
-			department_name: Sequelize.STRING,
-			price: Sequelize.INTEGER,
-			stock_quantity: Sequelize.INTEGER
-		});
-
+	  "Product",
+	  {
+		product_name: Sequelize.STRING,
+		department_name: Sequelize.STRING,
+		price: Sequelize.STRING,
+		stock_quantity: {
+		  type: Sequelize.INTEGER,
+		  validate: { min: 1 }
+		}
+	  },
+	  { timestamps: false }
+	);
+  
 	return Product;
-};
+  };
