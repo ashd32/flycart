@@ -2,11 +2,7 @@
   "development": {
     "username": "root",
     "password": "ATL2CHIfly$",
-<<<<<<< HEAD
-    "database": "bamazondb",
-=======
-    "database": "saluteDB",
->>>>>>> 5c9ac8639bf58d0209f6f7308919b4a83182c8ae
+    "database": "flycart",
     "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"
@@ -14,11 +10,7 @@
   "test": {
     "username": "root",
     "password": "root",
-<<<<<<< HEAD
-    "database": "bamazondb_test",
-=======
-    "database": "saluteDB_test",
->>>>>>> 5c9ac8639bf58d0209f6f7308919b4a83182c8ae
+    "database": "flycart_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

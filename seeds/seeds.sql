@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS bamazondb;
-CREATE DATABASE bamazondb;
-USE bamazondb;
+DROP DATABASE IF EXISTS flycart;
+CREATE DATABASE flycart;
+USE flycart;
 CREATE  TABLE IF NOT EXISTS `products` (
 		`product_name` VARCHAR(150) NOT NULL,
         `department_name` VARCHAR(150) NOT NULL,
