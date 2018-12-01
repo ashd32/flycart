@@ -1,4 +1,10 @@
 module.exports = function (connection, Sequelize) {
+	const sequelize = new Sequelize('connectionUri', {
+		define: {
+		  timestamps: false 
+		}
+	  });
+	  
 	const Product = connection.define(
 
 // Defines Schema for Sequelize
