@@ -13,6 +13,9 @@
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.1",
-    "sequelize": "^4.41.0"
+    "sequelize": "^4.41.0",
+    "seederStorage": "json",
+    "seederStoragePath": "seeds/seed-db.js",
+    "seederStorageTableName": "Products"
   }
 }
