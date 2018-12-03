@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seederStorage": "json",
+    "seederStoragePath": "seeds/seed-db.js",
+    "seederStorageTableName": "Products"
   },
   "author": "ashley-donald",
   "license": "ISC",
@@ -13,9 +16,6 @@
     "express": "^4.16.4",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.1",
-    "sequelize": "^4.41.0",
-    "seederStorage": "json",
-    "seederStoragePath": "seeds/seed-db.js",
-    "seederStorageTableName": "Products"
+    "sequelize": "^4.41.0"
   }
 }
