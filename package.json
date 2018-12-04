@@ -1,14 +1,11 @@
 {
-  "name": "bamazon",
+  "name": "flycart",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js && seeds/seed-db.js",
-    "seederStorage": "json",
-    "seederStoragePath": "seeds/seed-db.js",
-    "seederStorageTableName": "Products"
+    "start": "node ./seeds/seeds-db.js && node server.js"
   },
   "author": "ashley-donald",
   "license": "ISC",
