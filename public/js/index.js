@@ -68,4 +68,23 @@ $("#shopping-cart").click(function(event){
 $('.close').click(function(){
     $('.modal').css('display', 'none') // changes modal to close
 })
+$('#purchase').click(function(event){
+    event.preventDefault();
+    $('.modal').css('display', 'none') // changes modal to close
+    console.log("Purchase complete.");
+    const customerPurchase = [];
+    for(let i = 0; i < shoppingCart.length; i++){
+        const id = shoppingCart[i].id;
+        const updatedQuantity = shoppingCart[i].stock_quantity - shoppingCart[i].product_quantity
+        customerPurchase.push({
+            id:id,
+            updatedQuantity:updatedQuantity
+        })
+        $.ajax({
+            url: "/api/products/" + id, 
+            type: "PUT",
+            data: {updatedQuantity:updatedQuantity}
+        })
+    }
+})
 });
