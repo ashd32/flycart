@@ -29,15 +29,16 @@ module.exports = function(app) {
   // body has updated quantity to update stock quantity
   // using SEQUELIZE and $AJAX
 
-  app.put("api/products/:id", function(req, res) {
+  app.put('/api/products/:id', function(req, res) {
+    console.log('here ', req.params.id, req.body.updatedQuantity);
     db.Product.update(
+      {
+        stock_quantity: req.body.updatedQuantity
+      },
       {
         where: {
           id: req.params.id
         }
-      },
-      {
-        stock_quantity: req.body.updatedQuantity
       }
     ).then(function() {
       res.sendStatus(200);
