@@ -70,13 +70,29 @@
           name="productQuantity"
           placeholder="Enter Product Quantity"
         />
-        <button data-toggle="modal" data-target="#exampleModalCenter" id="submitOrders">Add to FLYCart</button>
+        <button
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          id="submitOrders"
+        >
+          Add to FLYCart
+        </button>
       </form>
     </div>
     <button id="shopping-cart">View Your Cart</button>
 
     <!-- Products Listed -->
-    <div id="searchDump"></div>
+    <table id="searchDump">
+      <thead>
+        <tr>
+          <th class="left"><span>Item</span></th>
+          <th class="left">Department</th>
+          <th class="qty-hdr">Price</th>
+          <th class="bag_itemtotal total-hdr">Inventory</th>
+          <th class="bag_itemtotal total-hdr">Product ID #</th>
+        </tr>
+      </thead>
+    </table>
 
     <div id="myModal" class="modal">
       <!-- Modal content -->

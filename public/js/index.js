@@ -6,13 +6,13 @@ $(document).ready(function() {
   function render(merch) {
     for (let i = 0; i < merch.length; i++) {
       $("#searchDump").append(
-        `<h2>Item: ${merch[i].product_name}</h2><h3>Department: ${
-          merch[i].department_name
-        }
-            </h3><h3>Price: $${merch[i].price}</h3><h5># Available: ${
-          merch[i].stock_quantity
-        }</h5>
-            <h5>Product ID: ${merch[i].id}</h5>`
+        `<tr>
+        <td><h3>${merch[i].product_name}</h3></td>
+        <td><h3>${merch[i].department_name}</h3></td>
+        <td><h3>$${merch[i].price}</h3></td>
+        <td><h5>${merch[i].stock_quantity} in stock</h5></td>
+        <td><h5>${merch[i].id}</h5></td>
+        </tr>`
       );
     }
   }
@@ -62,7 +62,7 @@ $(document).ready(function() {
       }
     }
 
-    console.log(productId, merchStock);
+    // console.log(productId, merchStock);
   });
 
   // listener for shopping cart array
@@ -71,7 +71,6 @@ $(document).ready(function() {
     if (shoppingCart.length === 0) {
       alert("Your shopping cart is empty");
     } else {
-      console.log(shoppingCart);
       $(".modal").css("display", "block"); // changes modal to display
     }
   });
