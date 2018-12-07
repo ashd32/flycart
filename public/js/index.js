@@ -7,11 +7,11 @@ $(document).ready(function() {
     for (let i = 0; i < merch.length; i++) {
       $("#searchDump").append(
         `<tr>
-        <td><h3>${merch[i].product_name}</h3></td>
-        <td><h3>${merch[i].department_name}</h3></td>
-        <td><h3>$${merch[i].price}</h3></td>
-        <td><h5>${merch[i].stock_quantity} in stock</h5></td>
-        <td><h5>${merch[i].id}</h5></td>
+        <td>${merch[i].product_name}</td>
+        <td>${merch[i].department_name}</td>
+        <td>$${merch[i].price}</td>
+        <td>${merch[i].stock_quantity} in stock</td>
+        <td>${merch[i].id}</td>
         </tr>`
       );
     }
