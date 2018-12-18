@@ -5,6 +5,7 @@ $(document).ready(function() {
   // render function to display data
   function render(merch) {
     for (let i = 0; i < merch.length; i++) {
+
       $("#searchDump").append(
         `<tr>
         <td>${merch[i].product_name}</td>
@@ -46,6 +47,7 @@ $(document).ready(function() {
           const product_name = productArray[i].product_name;
           const price = productArray[i].price;
           const stock_quantity = productArray[i].stock_quantity;
+          const product_dep = productArray[i].department_name;
           shoppingCart.push({
             id: id,
             product_name: product_name,
@@ -53,6 +55,40 @@ $(document).ready(function() {
             price: price,
             stock_quantity: stock_quantity
           }); // holds value user selected
+
+          const items = document.querySelector('.items');
+          items.innerHTML = (`<div>
+            <table>
+              <thead>
+                <tr class="w3-theme">
+                  <th class="left"><span>Item</span></th>
+                  <th class="left">Department</th>
+                  <th class="qty-hdr">Price</th>
+                  <th class="bag_itemtotal total-hdr">Qty</th>
+                  <th class="bag_itemtotal total-hdr">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    ${product_name}
+                  </td>
+                  <td>
+                    ${product_dep}
+                  </td>
+                  <td>
+                    ${price}
+                  </td>
+                  <td>
+                    ${productQuantity}
+                  </td>
+                  <td>
+                    ${productQuantity * price}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>`)
           alert(
             `(${productQuantity}) ${productArray[i].product_name}(s) was added to your FLYcart for $${productArray[i].price} each!`
           );
@@ -95,6 +131,8 @@ $(document).ready(function() {
         type: "PUT",
         data: { updatedQuantity: updatedQuantity }
       });
+      $("#searchDump").empty();
+      searchMerch();
     }
   });
 });
